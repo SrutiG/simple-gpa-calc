@@ -23,7 +23,7 @@ class gpaCalcGUI():
         for x in range(numSemesters):
             semesterWin = Toplevel()
             semesterg = SemesterGUI(semesterWin, x+1)
-            semesterWin.mainloop           
+            semesterWin.mainloop
 
     def showGPA(self):
         self.GPAWin = Toplevel()
@@ -55,11 +55,11 @@ class SemesterGUI():
         for x in range(self.numClasses):
             rownum = x + 1
             classnumLbl = Label(self.classes, text="Class %d" %(x+1))
-            classnumLbl.grid(rownum)
+            classnumLbl.grid(row = rownum)
             gradeEty = Entry(self.classes, width=5)
-            gradeEty.grid(rownum, column=1)
+            gradeEty.grid(row = rownum, column=1)
             credEty = Entry(self.classes, width = 5)
-            credEty.grid(rownum, column=2)
+            credEty.grid(row = rownum, column=2)
             self.gradeEtys.append(gradeEty)
             self.credEtys.append(credEty)
         enterBtn = Button(self.classes, text="Enter", command = self.enterData)
@@ -68,13 +68,17 @@ class SemesterGUI():
 
     def enterData(self):
         self.classes.withdraw()
-        for value in self.gradeEtys:
-            grade = value.get()
-            grades.append(GPAdict[grade])
-        for item in self.credEtys:
-            cred = item.get()
-            creds.append(cred)
-        return 1
+        self.root.withdraw()
+        classes = []
+        for x in range(len(self.gradeEtys)):
+            grade = self.gradeEtys[x].get()
+            cred = self.credEtys[x].get()
+            newClass = college.Class(cred, grade)
+            classes.append(newClass)
+        self.newSemester = college.Semester(classes)
+        return newSemester
+            
+            
 
 newWin = Tk()
 loop = gpaCalcGUI(newWin)

@@ -5,7 +5,7 @@ class Class():
     def __init__(self, creds, letterGrade):
         self.creds = creds
         self.letterGrade = letterGrade
-        self.grade = gpaDict[self.letterGrade]
+        self.grade = self.gpaDict[self.letterGrade]
 
     def nameClass(name):
         self.name = name
@@ -15,7 +15,7 @@ class Semester():
     creds = []
     grades = []
 
-    def __init__(self, classArray)
+    def __init__(self, classArray):
         self.classArray = classArray
 
     def calculateSemesterGPA():
@@ -35,7 +35,7 @@ class College():
     creds = []
     grades = []
 
-    def __init__(self, semesterArray)
+    def __init__(self, semesterArray):
         self.semesterArray = semesterArray
 
     def calculateCollegeGPA():
