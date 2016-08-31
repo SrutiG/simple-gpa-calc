@@ -45,7 +45,7 @@ class gpaCalcGUI():
         mainWin = Tk()
         mainWin.title("Welcome")
         mainCollege = college.College(self.Semesters)
-        gpa = mainCollege.calculateCollegeGPA()
+        gpa = mainCollege.gpa
         gpaLbl = Label(mainWin, text="your GPA is %s"%gpa)
         gpaLbl.grid(row=0)
         
