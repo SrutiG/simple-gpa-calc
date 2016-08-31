@@ -45,11 +45,10 @@ class College():
         self.totalcreds = 0
         for x in self.semesterArray:
             self.creds.append(x.totalcreds)
-            for item in x.grades:
-                self.grades.append(item)
+            self.grades.append(x.gpa)
         for x in range(len(self.creds)):
-            self.totalcreds = self.totalcreds + self.creds[x]
             credsxgrades = credsxgrades + self.creds[x]*self.grades[x]
+        self.totalcreds = sum(self.creds)
         self.gpa = credsxgrades/self.totalcreds
 
         return self.gpa           

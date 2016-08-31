@@ -41,7 +41,6 @@ class gpaCalcGUI():
             self.showGPA()
 
     def showGPA(self):
-        print(self.Semesters)
         mainWin = Tk()
         mainWin.title("Welcome")
         mainCollege = college.College(self.Semesters)
