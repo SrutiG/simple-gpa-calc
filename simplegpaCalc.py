@@ -14,7 +14,7 @@ class gpaCalcGUI():
         self.semesterEty = Entry(self.root, width=5)
         self.semesterEty.grid(row=0, column=1)
         enterBtn = Button(self.root, text="Enter", command = self.helperFunction)
-        enterBtn.grid(row=1)
+        enterBtn.grid(row=0, column=2)
 
     def helperFunction(self):
         self.root.withdraw()
@@ -43,10 +43,11 @@ class gpaCalcGUI():
     def showGPA(self):
         mainWin = Tk()
         mainWin.title("Welcome")
+        mainWin.geometry("250x250")
         mainCollege = college.College(self.Semesters)
         gpa = mainCollege.gpa
-        gpaLbl = Label(mainWin, text="your GPA is %s"%gpa)
-        gpaLbl.grid(row=0)
+        gpaLbl = Label(mainWin, text="your GPA is {0:.2f}".format(gpa))
+        gpaLbl.place(relx=0.5, rely=0.5, anchor=CENTER)
         
     def enterSemesterInfo(self, root, semesterNum):
         classesLbl = Label(root, text="How many classes did you take in semester %d?" %semesterNum)
@@ -54,7 +55,7 @@ class gpaCalcGUI():
         classesEty = Entry(root, width = 5)
         classesEty.grid(row = 0, column = 4)
         enterBtn = Button(root, text="Enter", command = lambda:self.enterClassInfo(root, int(classesEty.get()), semesterNum))
-        enterBtn.grid(row = 1, column=5)
+        enterBtn.grid(row = 0, column=5)
         
 
     def enterClassInfo(self, semesterWin, numClasses, semesterNum):
@@ -75,8 +76,8 @@ class gpaCalcGUI():
             credEty.grid(row = rownum, column=2)
             gradeEtys.append(gradeEty)
             credEtys.append(credEty)
-        enterBtn = Button(classesWin, text="Enter", command = lambda:self.combineFuncs(self.semesterWindows[semesterNum-1], self.semesterWindows[semesterNum], semesterWin, classesWin, gradeEtys, credEtys))
-        enterBtn.grid(row = numClasses+1)
+        enterBtn = Button(classesWin, text="Enter", width = 10, command = lambda:self.combineFuncs(self.semesterWindows[semesterNum-1], self.semesterWindows[semesterNum], semesterWin, classesWin, gradeEtys, credEtys))
+        enterBtn.grid(row = numClasses+1, column=1, columnspan=2)
         
     def combineFuncs(self, window1, window2, semesterWin, classesWin, gradeEtys, credEtys):
         self.enterData(semesterWin, classesWin, gradeEtys, credEtys)
