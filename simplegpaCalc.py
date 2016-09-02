@@ -83,9 +83,9 @@ class gpaCalcGUI():
             self.enterSemesterInfo(self.semesterWindows[number], number+1)           
 
     '''
-    I made this function to help with sequencing. While the createSemesterWin function is looping through
-    the number of semesters, it creates many Toplevels in the process. This ensures that the right one
-    is being shown by withdrawing the previous and showing the next when the enter button on the classes window
+    While the createSemesterWin function is looping through the number of semesters,
+    it creates many Toplevels in the process. This ensures that the right one is being shown by
+    withdrawing the previous and showing the next when the enter button on the classes window
     is clicked. If there are no more windows afterwards, it shows the main window.
     @param prevWindow: the previous window which already has the necessary data and needs to be hidden
     @param nextWindow: the next window which is blank for the user to input information

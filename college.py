@@ -47,10 +47,21 @@ class Semester():
     creds = []
     grades = []
 
+    '''
+    Initializes the semester Object and sets the classArray and
+    calls the calculateSemesterGPA function
+    '''
+
     def __init__(self, classArray):
         self.classArray = classArray
         self.calculateSemesterGPA()
 
+    '''
+    Calculates the Semester GPA by appending the credits and float grade
+    to the creds and grades list, and multiplying the credits of a class
+    with its corresponding grade and dividing it by the total number of credits.
+    '''
+    
     def calculateSemesterGPA(self):
         credsxgrades = 0
         self.totalcreds = 0
@@ -71,9 +82,19 @@ class College():
     creds = []
     grades = []
 
+    '''
+    Initializes the College Object and sets the semesterArray and
+    calls the calculateCollegeGPA function
+    '''
+    
     def __init__(self, semesterArray):
         self.semesterArray = semesterArray
         self.calculateCollegeGPA()
+
+    '''
+    Calculates the College GPA by using the individual Semester GPAs
+    in the Semester array and adding up the total number of credits
+    '''
 
     def calculateCollegeGPA(self):
         credsxgrades = 0
@@ -84,6 +105,4 @@ class College():
         for x in range(len(self.creds)):
             credsxgrades = credsxgrades + self.creds[x]*self.grades[x]
         self.totalcreds = sum(self.creds)
-        self.gpa = credsxgrades/self.totalcreds
-
-        return self.gpa           
+        self.gpa = credsxgrades/self.totalcreds          
