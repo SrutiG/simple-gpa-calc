@@ -22,6 +22,7 @@ Simple GPA Calculator
 
 @import tkinter
 @import college.py
+@import tkMessageBox
 '''
 
 from tkinter import *
@@ -56,14 +57,40 @@ class gpaCalcGUI():
 
     '''
     Hides the main window and gets the number of semesters from the entry box
-    prompts the createSemesterWin function to input the necessary info
+    prompts the createSemesterWin function to input the necessary info. Checks
+    for valid input
     '''
 
     def helperFunction(self):
         self.root.withdraw()
-        self.numSemesters = int(self.semesterEty.get())
-        self.createSemesterWin(self.numSemesters)
+        try:
+            self.numSemesters = int(self.semesterEty.get())
+            self.createSemesterWin(self.numSemesters)
+        except Exception:
+            self.errorFunc("Invalid Input- must be a number")
 
+    '''
+    creates an error window with a message that explains
+    the type of error
+    @param errorMessage: the message associated with the error
+    '''
+
+    def errorFunc(self, errorMessage):
+        errorWin = Toplevel()
+        errorWin.title("Error!")
+        errorLbl = Label(errorWin, text="%s"%errorMessage)
+        errorLbl.grid(row=0)
+        backBtn = Button(errorWin, text = "Back", command = lambda:self.withdrawErrorWin(errorWin))
+        backBtn.grid(row=1)
+        self.root.deiconify()
+        
+    '''
+    withdraws the error window
+    @param window- the window to withdraw
+    '''
+    
+    def withdrawErrorWin(self, window):
+        window.withdraw()
     '''
     Uses the number of semesters inputted by the user to create the correct number
     of semester windows. Adds them to an array so that each can be accessed individually.
