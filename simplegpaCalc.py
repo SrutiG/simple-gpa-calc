@@ -4,7 +4,6 @@ Simple GPA Calculator
 
 
 ~~Future Updates (in order)~~
--adding error messages when the wrong type of input is entered
 -aesthetic improvements (fonts, font sizes, backgrounds...etc)
 -creating an SQL database so that the user can save his/her info
 -login window
