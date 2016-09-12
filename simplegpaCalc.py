@@ -4,7 +4,7 @@ Simple GPA Calculator
 
 
 ~~Future Updates (in order)~~
--aesthetic improvements (fonts, font sizes, backgrounds...etc)
+-aesthetic improvements (fonts, font sizes, backgrounds...etc) **in progress**
 -creating an SQL database so that the user can save his/her info
 -login window
 -adding a button on the main window to add another semester (and updating the GPA accordingly)
