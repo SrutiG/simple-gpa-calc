@@ -214,7 +214,6 @@ class gpaCalcGUI():
 
     def enterData(self, window1, window2, semesterWin, classesWin, gradeEtys, credEtys):
         classesWin.withdraw()
-        semesterWin.withdraw()
         classes = []
         for x in range(len(gradeEtys)):
             grade = gradeEtys[x].get()
@@ -225,6 +224,7 @@ class gpaCalcGUI():
             except Exception:
                 self.errorFunc("Grade must be A, B, C, D, or F; Credits must be a number", classesWin)
                 return
+        semesterWin.withdraw()
         newSemester = college.Semester(classes)
         self.Semesters.append(newSemester)
         self.showWindow(window1, window2)
