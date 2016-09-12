@@ -67,7 +67,7 @@ class gpaCalcGUI():
             self.numSemesters = int(self.semesterEty.get())
             self.createSemesterWin(self.numSemesters)
         except Exception:
-            self.errorFunc("Invalid Input- must be a number")
+            self.errorFunc("Invalid Input- must be a number", self.root)
 
     '''
     creates an error window with a message that explains
@@ -75,14 +75,14 @@ class gpaCalcGUI():
     @param errorMessage: the message associated with the error
     '''
 
-    def errorFunc(self, errorMessage):
+    def errorFunc(self, errorMessage, currentWin):
         errorWin = Toplevel()
         errorWin.title("Error!")
         errorLbl = Label(errorWin, text="%s"%errorMessage)
         errorLbl.grid(row=0)
         backBtn = Button(errorWin, text = "Back", command = lambda:self.withdrawErrorWin(errorWin))
         backBtn.grid(row=1)
-        self.root.deiconify()
+        currentWin.deiconify()
         
     '''
     withdraws the error window
@@ -154,8 +154,19 @@ class gpaCalcGUI():
         classesLbl.grid(row = 0, columnspan = 3)
         classesEty = Entry(root, width = 5)
         classesEty.grid(row = 0, column = 4)
-        enterBtn = Button(root, text="Enter", command = lambda:self.enterClassInfo(root, int(classesEty.get()), semesterNum))
+        enterBtn = Button(root, text="Enter", command = lambda:self.helperFunction2(root, classesEty, semesterNum))
         enterBtn.grid(row = 0, column=5)
+
+    '''
+    Helper function makes sure that the user input for number of classes
+    is a valid number
+    '''
+
+    def helperFunction2(self, semesterWin, entry, semesterNum):
+        try:
+            self.enterClassInfo(semesterWin, int(entry.get()), semesterNum)
+        except Exception:
+            self.errorFunc("Invalid input- must be a number", semesterWin)
 
     '''       
     creates the necessary number of widgets to enter class information based on the user
@@ -186,40 +197,38 @@ class gpaCalcGUI():
             gradeEtys.append(gradeEty)
             credEtys.append(credEty)
         enterBtn = Button(classesWin, text="Enter", width = 10,
-                command = lambda:self.combineFuncs(self.semesterWindows[semesterNum-1],
+                command = lambda:self.enterData(self.semesterWindows[semesterNum-1],
                 self.semesterWindows[semesterNum], semesterWin, classesWin, gradeEtys, credEtys))
         enterBtn.grid(row = numClasses+1, column=1, columnspan=2)
-
-    '''
-    I made this function so that the button can perform two tasks at once- switching windows
-    as well as inputting data
-    '''
-
-    def combineFuncs(self, window1, window2, semesterWin, classesWin, gradeEtys, credEtys):
-        self.enterData(semesterWin, classesWin, gradeEtys, credEtys)
-        self.showWindow(window1, window2)
 
     '''       
     This function uses the information the user inputted about the classes they took during the semester
     to create many class objects and store them in an array. This array is then used to create a semester object.
     The semester object is stored in the Semesters array.
+    @param window1: the window of the classes data is being entered for
+    @param window2: the next window to show
     @param semesterWin: the window to enter the number of classes in the semester
     @param classesWin: the window to enter the information about those classes
     @param gradeEtys: an array of the entries that have grades in them
     @param credEtys: an array of the entries that have credits stored in them
     '''
 
-    def enterData(self, semesterWin, classesWin, gradeEtys, credEtys):
+    def enterData(self, window1, window2, semesterWin, classesWin, gradeEtys, credEtys):
         classesWin.withdraw()
         semesterWin.withdraw()
         classes = []
         for x in range(len(gradeEtys)):
             grade = gradeEtys[x].get()
             cred = credEtys[x].get()
-            newClass = college.Class(cred, grade)
-            classes.append(newClass)
+            try:
+                newClass = college.Class(float(cred), grade)
+                classes.append(newClass)
+            except Exception:
+                self.errorFunc("Grade must be A, B, C, D, or F; Credits must be a number", classesWin)
+                return
         newSemester = college.Semester(classes)
         self.Semesters.append(newSemester)
+        self.showWindow(window1, window2)
 
             
             
