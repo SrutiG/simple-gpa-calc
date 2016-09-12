@@ -47,12 +47,15 @@ class gpaCalcGUI():
     def __init__(self, root):
         self.root = root
         self.root.title("GPA Calculator")
-        semesterLbl = Label(self.root, text="How many semesters have you completed?")
+        self.root.geometry("450x100")
+        frame = Frame(self.root)
+        semesterLbl = Label(frame, text="How many semesters have you completed?")
         semesterLbl.grid(row=0)
-        self.semesterEty = Entry(self.root, width=5)
+        self.semesterEty = Entry(frame, width=5)
         self.semesterEty.grid(row=0, column=1)
-        enterBtn = Button(self.root, text="Enter", command = self.helperFunction)
+        enterBtn = Button(frame, text="Enter", command = self.helperFunction)
         enterBtn.grid(row=0, column=2)
+        frame.place(relx=0.5, rely=0.5, anchor="center")
 
     '''
     Hides the main window and gets the number of semesters from the entry box
@@ -101,6 +104,7 @@ class gpaCalcGUI():
         self.semesterWindows = []
         for x in range(numSemesters):
             semesterWin = Toplevel()
+            semesterWin.geometry("450x100")
             semesterWin.withdraw()
             self.semesterWindows.append(semesterWin)
         self.semesterWindows.append(0)
@@ -149,12 +153,14 @@ class gpaCalcGUI():
     '''
 
     def enterSemesterInfo(self, root, semesterNum):
-        classesLbl = Label(root, text="How many classes did you take in semester %d?" %semesterNum)
+        frame = Frame(root)
+        classesLbl = Label(frame, text="How many classes did you take in semester %d?" %semesterNum)
         classesLbl.grid(row = 0, columnspan = 3)
-        classesEty = Entry(root, width = 5)
+        classesEty = Entry(frame, width = 5)
         classesEty.grid(row = 0, column = 4)
-        enterBtn = Button(root, text="Enter", command = lambda:self.helperFunction2(root, classesEty, semesterNum))
+        enterBtn = Button(frame, text="Enter", command = lambda:self.helperFunction2(root, classesEty, semesterNum))
         enterBtn.grid(row = 0, column=5)
+        frame.place(relx=0.5, rely=0.5, anchor="center")
 
     '''
     Helper function makes sure that the user input for number of classes
@@ -178,7 +184,9 @@ class gpaCalcGUI():
     '''
 
     def enterClassInfo(self, semesterWin, numClasses, semesterNum):
+        semesterWin.withdraw()
         classesWin = Toplevel()
+        classesWin.title("Semester %s"%semesterNum)
         credsLbl = Label(classesWin, text="Grade")
         credsLbl.grid(row= 0, column=1)
         gradeLbl = Label(classesWin, text="Credits")
@@ -197,7 +205,7 @@ class gpaCalcGUI():
             credEtys.append(credEty)
         enterBtn = Button(classesWin, text="Enter", width = 10,
                 command = lambda:self.enterData(self.semesterWindows[semesterNum-1],
-                self.semesterWindows[semesterNum], semesterWin, classesWin, gradeEtys, credEtys))
+                self.semesterWindows[semesterNum], classesWin, gradeEtys, credEtys))
         enterBtn.grid(row = numClasses+1, column=1, columnspan=2)
 
     '''       
@@ -212,7 +220,7 @@ class gpaCalcGUI():
     @param credEtys: an array of the entries that have credits stored in them
     '''
 
-    def enterData(self, window1, window2, semesterWin, classesWin, gradeEtys, credEtys):
+    def enterData(self, window1, window2, classesWin, gradeEtys, credEtys):
         classesWin.withdraw()
         classes = []
         for x in range(len(gradeEtys)):
@@ -224,7 +232,6 @@ class gpaCalcGUI():
             except Exception:
                 self.errorFunc("Grade must be A, B, C, D, or F; Credits must be a number", classesWin)
                 return
-        semesterWin.withdraw()
         newSemester = college.Semester(classes)
         self.Semesters.append(newSemester)
         self.showWindow(window1, window2)
