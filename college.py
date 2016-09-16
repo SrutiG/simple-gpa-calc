@@ -1,6 +1,6 @@
 '''
 College
-@author Sruti Guhathakurta
+Author: Sruti Guhathakurta
 
 
 ~~Future Updates~~
@@ -9,8 +9,11 @@ Previous Class/Semester and Current Class/Semester?
 
 '''
 A Class object is initialized by giving the number of credits and the letter grade
-it can be renamed. The GPA dictionary has keys which are strings of capital letters
-and the corresponding GPA float value.
+it can be renamed. 
+
+Attributes:
+    gpaDict: The GPA dictionary has keys which are strings of capital letters
+    and the corresponding GPA float value. 
 '''
 
 class Class():
@@ -20,8 +23,10 @@ class Class():
     '''
     Initializes the class and converts the letter grade to a float
     value and stores it in the grade variable
-    @param creds: the number of credits
-    @param letterGrade: the letter grade received in the class
+    
+    Args:
+       creds: the number of credits
+       letterGrade: the letter grade received in the class
     '''
 
     def __init__(self, creds, letterGrade):
@@ -31,7 +36,9 @@ class Class():
 
     '''
     Allows the addition of a name attribute to the Class
-    @param name: the name of the class
+    
+    Args:
+       name: the name of the class
     '''
     
     def nameClass(self, name):
@@ -40,6 +47,10 @@ class Class():
 '''
 A Semester object is initialized by passing in an array of classes.
 It prompts the calculate GPA function on initialization
+
+Attributes:
+    creds: an array of the credits of each class taken during the semester
+    grades: an array of the numerical grade (4.0 scale) received in each class
 '''
 
 class Semester():
@@ -50,6 +61,9 @@ class Semester():
     '''
     Initializes the semester Object and sets the classArray and
     calls the calculateSemesterGPA function
+
+    Args:
+       classArray: an array of classes taken during the semester      
     '''
 
     def __init__(self, classArray):
@@ -75,6 +89,10 @@ class Semester():
 '''
 A College object is initialized by passing in an array of semesters.
 It prompts the calculate GPA function on initialization
+
+Attributes:
+    creds: array of the total number of credits taken in each semester
+    grades: array of the average gpas from each semester
 '''
 
 class College():
@@ -85,6 +103,9 @@ class College():
     '''
     Initializes the College Object and sets the semesterArray and
     calls the calculateCollegeGPA function
+
+    Args:
+       semesterArray: an array of semester objects
     '''
     
     def __init__(self, semesterArray):

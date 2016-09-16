@@ -1,11 +1,11 @@
 '''
 Simple GPA Calculator
-@author Sruti Guhathakurta
+Author: Sruti Guhathakurta
 
 
 ~~Future Updates (in order)~~
 -aesthetic improvements (fonts, font sizes, backgrounds...etc) **in progress**
--creating an SQL database so that the user can save his/her info
+-creating a database so that the user can save his/her info
 -login window
 -adding a button on the main window to add another semester (and updating the GPA accordingly)
 -adding the option to enter class names
@@ -19,18 +19,23 @@ Simple GPA Calculator
   Professor information
   Whether/not the course that the user is planning to take will be offered during a certain semester
 
-@import tkinter
-@import college.py
-@import tkMessageBox
+Imports:
+    tkinter
+    college.py
+    tkMessageBox
 '''
 
 from tkinter import *
 import college
 
 '''
-A GUI that allows a user to enter the number of semesters they have completed,
+AGUI that allows a user to enter the number of semesters they have completed,
 the number of classes and the grades/credits for each class.
 Calculates the GPA and displays it on the main window
+
+Attributes:
+    Semesters: an array populated with semester objects which are used to
+    create the college object and calculate the overall GPA.
 '''
 
 class gpaCalcGUI():
@@ -41,7 +46,9 @@ class gpaCalcGUI():
     Creates the initial window with title "GPA Calculator"
     which asks the user to input the number of semesters he/she has completed.
     the enter button prompts a helper function
-    @param root: the Tk window used to display this information
+    
+    Args:
+       root: the Tk window used to display this information
     '''
     
     def __init__(self, root):
@@ -74,7 +81,9 @@ class gpaCalcGUI():
     '''
     creates an error window with a message that explains
     the type of error
-    @param errorMessage: the message associated with the error
+    
+    Args:
+       errorMessage: the message associated with the error
     '''
 
     def errorFunc(self, errorMessage, currentWin):
@@ -88,7 +97,9 @@ class gpaCalcGUI():
         
     '''
     withdraws the error window
-    @param window- the window to withdraw
+    
+    Args:
+       window- the window to withdraw
     '''
     
     def withdrawErrorWin(self, window):
@@ -97,7 +108,9 @@ class gpaCalcGUI():
     Uses the number of semesters inputted by the user to create the correct number
     of semester windows. Adds them to an array so that each can be accessed individually.
     and to prevent all of them from showing at once. Shows the first window and hides the rest.
-    @param numSemesters: the number of semesters that the user has completed
+
+    Args:
+       numSemesters: the number of semesters that the user has completed
     '''
 
     def createSemesterWin(self, numSemesters):
@@ -117,8 +130,10 @@ class gpaCalcGUI():
     it creates many Toplevels in the process. This ensures that the right one is being shown by
     withdrawing the previous and showing the next when the enter button on the classes window
     is clicked. If there are no more windows afterwards, it shows the main window.
-    @param prevWindow: the previous window which already has the necessary data and needs to be hidden
-    @param nextWindow: the next window which is blank for the user to input information
+
+    Args:
+       prevWindow: the previous window which already has the necessary data and needs to be hidden
+       nextWindow: the next window which is blank for the user to input information
     '''
 
     def showWindow(self, prevWindow, nextWindow):
@@ -148,8 +163,10 @@ class gpaCalcGUI():
     '''
     Creates the label, entry, and button for the semester window and sets the function
     of the button to create a new Toplevel to enter class information
-    @param root: the window where all the information is displayed
-    @param semesterNum: the number of the Semester that the window is displaying
+
+    Args:
+       root: the window where all the information is displayed
+       semesterNum: the number of the Semester that the window is displaying
     '''
 
     def enterSemesterInfo(self, root, semesterNum):
@@ -178,9 +195,11 @@ class gpaCalcGUI():
     inputted number of classes taken in the semester. The enter button hides the windows used
     to enter info for the current semester and display the ones for the next semester.
     it also prompts the data entry function
-    @param semesterWin the window that asked for the number of semesters
-    @param numClasses the number of classes taken during the semester
-    @param semesterNum the number of the semester
+
+    Args:
+       semesterWin the window that asked for the number of semesters
+       numClasses the number of classes taken during the semester
+       semesterNum the number of the semester
     '''
 
     def enterClassInfo(self, semesterWin, numClasses, semesterNum):
@@ -212,12 +231,14 @@ class gpaCalcGUI():
     This function uses the information the user inputted about the classes they took during the semester
     to create many class objects and store them in an array. This array is then used to create a semester object.
     The semester object is stored in the Semesters array.
-    @param window1: the window of the classes data is being entered for
-    @param window2: the next window to show
-    @param semesterWin: the window to enter the number of classes in the semester
-    @param classesWin: the window to enter the information about those classes
-    @param gradeEtys: an array of the entries that have grades in them
-    @param credEtys: an array of the entries that have credits stored in them
+
+    Args:
+       window1: the window of the classes data is being entered for
+       window2: the next window to show
+       semesterWin: the window to enter the number of classes in the semester
+       classesWin: the window to enter the information about those classes
+       gradeEtys: an array of the entries that have grades in them
+       credEtys: an array of the entries that have credits stored in them
     '''
 
     def enterData(self, window1, window2, classesWin, gradeEtys, credEtys):
