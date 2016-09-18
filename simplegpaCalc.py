@@ -29,7 +29,7 @@ from tkinter import *
 import college
 
 '''
-AGUI that allows a user to enter the number of semesters they have completed,
+A GUI that allows a user to enter the number of semesters they have completed,
 the number of classes and the grades/credits for each class.
 Calculates the GPA and displays it on the main window
 
@@ -58,9 +58,9 @@ class gpaCalcGUI():
         frame = Frame(self.root)
         semesterLbl = Label(frame, text="How many semesters have you completed?")
         semesterLbl.grid(row=0)
-        self.semesterEty = Entry(frame, width=5)
-        self.semesterEty.grid(row=0, column=1)
-        enterBtn = Button(frame, text="Enter", command = self.helperFunction)
+        semesterEty = Entry(frame, width=5)
+        semesterEty.grid(row=0, column=1)
+        enterBtn = Button(frame, text="Enter", command = lambda:self.helperFunction(semesterEty))
         enterBtn.grid(row=0, column=2)
         frame.place(relx=0.5, rely=0.5, anchor="center")
 
@@ -70,11 +70,11 @@ class gpaCalcGUI():
     for valid input
     '''
 
-    def helperFunction(self):
+    def helperFunction(self, semesterEty):
         self.root.withdraw()
         try:
-            self.numSemesters = int(self.semesterEty.get())
-            self.createSemesterWin(self.numSemesters)
+            numSemesters = int(semesterEty.get())
+            self.createSemesterWin(numSemesters)
         except Exception:
             self.errorFunc("Invalid Input- must be a number", self.root)
 
