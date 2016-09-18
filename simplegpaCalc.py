@@ -69,6 +69,9 @@ class gpaCalcGUI():
     Hides the main window and gets the number of semesters from the entry box
     prompts the createSemesterWin function to input the necessary info. Checks
     for valid input
+
+    Args:
+       semesterEty: The entry containing the number of semesters
     '''
 
     def helperFunction(self, semesterEty):
