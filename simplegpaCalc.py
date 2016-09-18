@@ -4,6 +4,7 @@ Author: Sruti Guhathakurta
 
 
 ~~Future Updates (in order)~~
+-fix enterData function
 -aesthetic improvements (fonts, font sizes, backgrounds...etc) **in progress**
 -creating a database so that the user can save his/her info
 -login window
